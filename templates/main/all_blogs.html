@@ -1,0 +1,245 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    All Blogs
+{% endblock title %}
+{% block body %}
+
+
+<!-- section main content -->
+<section class="main-content">
+    <div class="container-xl">
+
+        <div class="row gy-4">
+
+            <div class="col-lg-8">
+
+                <div class="row gy-4">
+                {% for blog in blogs %}
+                    <div class="col-sm-6">
+                        <!-- post -->
+                        <div class="post post-grid rounded bordered">
+                            <div class="thumb top-rounded">
+                                <a href="/all_blogs/?category={{blog.id}}" class="category-badge position-absolute">{{blog.category}}</a>
+                                <a href="{% url 'blog_single' blog.slug %}">
+                                    <div class="inner">
+                                        <img src="{{blog.feature_image.url}}" alt="post-title" />
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="details">
+                                <ul class="meta list-inline mb-0">
+                                    <li class="list-inline-item"><a href="#"><img src="{% static 'images/other/author-sm.png' %}" class="author" alt="author"/>{{blog.author}}</a></li>
+                                    <li class="list-inline-item">{{blog.date}}</li>
+                                </ul>
+                                <h5 class="post-title mb-3 mt-3"><a href="{% url 'blog_single' blog.slug %}">{{blog.title | truncatechars:50}}</a></h5>
+                                <p class="excerpt mb-0"></p>
+                            </div>
+                            <div class="post-bottom clearfix d-flex align-items-center">
+                                <div class="social-share me-auto">
+                                    <button class="toggle-button icon-share"></button>
+                                    <ul class="icons list-unstyled list-inline mb-0">
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="more-button float-end">
+                                    <a href="blog-single.html"><span class="icon-options"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">1</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="col-lg-4">
+
+                <!-- sidebar -->
+                <div class="sidebar">
+                    <!-- widget categories -->
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">Explore Categories</h3>
+                            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave" />
+                        </div>
+                        <div class="widget-content">
+                            <ul class="list">
+                                
+                                {% for cate in category %}
+                                <li><a href="/all_blogs/?category={{cate.id}}">{{cate.name}}</a><span>({{cate.post_set.count}})</span></li>
+                                {% endfor %}
+                                  
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <!-- widget categories -->
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">Best Author Lists</h3>
+                            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave" />
+                        </div>
+                        <div class="widget-content">
+                            <ul class="list">
+                                
+                                {% for a in blogs %}
+                                <li><a href="/all_blogs/?author={{a.id}}">{{a.author}}</a><span>(1)</span></li>
+                                {% endfor %}
+                                   
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    
+
+                    
+
+                    <!-- widget post carousel -->
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">Celebration</h3>
+                            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave" />
+                        </div>
+                        <div class="widget-content">
+                            <div class="post-carousel-widget">
+                                <!-- post -->
+                                <div class="post post-carousel">
+                                    <div class="thumb rounded">
+                                        <a href="category.html" class="category-badge position-absolute">How to</a>
+                                        <a href="blog-single.html">
+                                            <div class="inner">
+                                                <img src="{% static 'images/widgets/widget-carousel-1.jpg' %}" alt="post-title" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 Easy Ways You Can Turn Future Into Success</a></h5>
+                                    <ul class="meta list-inline mt-2 mb-0">
+                                        <li class="list-inline-item"><a href="#">Katen Doe</a></li>
+                                        <li class="list-inline-item">29 March 2021</li>
+                                    </ul>
+                                </div>
+                                <!-- post -->
+                                <div class="post post-carousel">
+                                    <div class="thumb rounded">
+                                        <a href="category.html" class="category-badge position-absolute">Trending</a>
+                                        <a href="blog-single.html">
+                                            <div class="inner">
+                                                <img src="{% static 'images/widgets/widget-carousel-2.jpg' %}" alt="post-title" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">Master The Art Of Nature With These 7 Tips</a></h5>
+                                    <ul class="meta list-inline mt-2 mb-0">
+                                        <li class="list-inline-item"><a href="#">Katen Doe</a></li>
+                                        <li class="list-inline-item">29 March 2021</li>
+                                    </ul>
+                                </div>
+                                <!-- post -->
+                                <div class="post post-carousel">
+                                    <div class="thumb rounded">
+                                        <a href="category.html" class="category-badge position-absolute">How to</a>
+                                        <a href="blog-single.html">
+                                            <div class="inner">
+                                                <img src="{% static 'images/widgets/widget-carousel-1.jpg' %}" alt="post-title" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 Easy Ways You Can Turn Future Into Success</a></h5>
+                                    <ul class="meta list-inline mt-2 mb-0">
+                                        <li class="list-inline-item"><a href="#">Katen Doe</a></li>
+                                        <li class="list-inline-item">29 March 2021</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- carousel arrows -->
+                            <div class="slick-arrows-bot">
+                                <button type="button" data-role="none" class="carousel-botNav-prev slick-custom-buttons" aria-label="Previous"><i class="icon-arrow-left"></i></button>
+                                <button type="button" data-role="none" class="carousel-botNav-next slick-custom-buttons" aria-label="Next"><i class="icon-arrow-right"></i></button>
+                            </div>
+                        </div>		
+                    </div>
+
+                    
+
+                    <!-- widget tags -->
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">Tag Clouds</h3>
+                            <img src="{% static 'images/wave.svg' %}" class="wave" alt="wave" />
+                        </div>
+                        <div class="widget-content">
+                            <a href="#" class="tag">#Trending</a>
+                            <a href="#" class="tag">#Video</a>
+                            <a href="#" class="tag">#Featured</a>
+                            <a href="#" class="tag">#Gallery</a>
+                            <a href="#" class="tag">#Celebrities</a>
+                        </div>		
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- instagram feed -->
+<div class="instagram">
+    <div class="container-xl">
+        <!-- button -->
+        <a href="#" class="btn btn-default btn-instagram">@Katen on Instagram</a>
+        <!-- images -->
+        <div class="instagram-feed d-flex flex-wrap">
+            <div class="insta-item col-sm-2 col-6 col-md-2">
+                <a href="#">
+                    <img src="{% static 'images/insta/insta-1.jpg' %}" alt="insta-title" />
+                </a>
+            </div>
+            <div class="insta-item col-sm-2 col-6 col-md-2">
+                <a href="#">
+                    <img src="{% static 'images/insta/insta-2.jpg' %}" alt="insta-title" />
+                </a>
+            </div>
+            <div class="insta-item col-sm-2 col-6 col-md-2">
+                <a href="#">
+                    <img src="{% static 'images/insta/insta-3.jpg' %}" alt="insta-title" />
+                </a>
+            </div>
+            <div class="insta-item col-sm-2 col-6 col-md-2">
+                <a href="#">
+                    <img src="{% static 'images/insta/insta-4.jpg' %}" alt="insta-title" />
+                </a>
+            </div>
+            <div class="insta-item col-sm-2 col-6 col-md-2">
+                <a href="#">
+                    <img src="{% static 'images/insta/insta-5.jpg' %}" alt="insta-title" />
+                </a>
+            </div>
+            <div class="insta-item col-sm-2 col-6 col-md-2">
+                <a href="#">
+                    <img src="{% static 'images/insta/insta-6.jpg' %}" alt="insta-title" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+    
+    
